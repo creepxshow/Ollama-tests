@@ -1,0 +1,34 @@
+# Copy to terraform.tfvars and fill in. Do NOT commit terraform.tfvars.
+
+# --- Proxmox connection ---
+pve_endpoint  = "https://192.168.1.10:8006/"
+pve_api_token = "terraform@pve!tf=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+pve_node_name = "pve"
+pve_insecure  = true
+pve_ssh_username = "root"
+pve_ssh_agent    = true
+
+# --- SSH keys for the guests ---
+ssh_public_key       = "ssh-ed25519 AAAA... you@host"
+ssh_private_key_file = "~/.ssh/id_ed25519"
+
+# --- Storage / network (match your PVE) ---
+datastore_id          = "local-lvm"
+snippet_datastore_id  = "local"
+template_datastore_id = "local"
+mgmt_bridge           = "vmbr0"
+lab_bridge            = "vmbr0"   # isolate before running atomics (see README)
+
+# --- Ollama container: static IP strongly recommended so provisioning works ---
+ollama_ip_cidr    = "192.168.1.50/24"
+ollama_gateway    = "192.168.1.1"
+ollama_ip_address = "192.168.1.50"
+ollama_cores      = 4
+ollama_memory_mb  = 16384
+ollama_disk_gb    = 32
+ollama_models     = ["llama3.2:1b", "llama3.2:3b", "llama3.1:8b"]
+
+# --- Lab VM ---
+lab_ip_cidr = "192.168.1.51/24"
+lab_gateway = "192.168.1.1"
+lab_username = "labadmin"

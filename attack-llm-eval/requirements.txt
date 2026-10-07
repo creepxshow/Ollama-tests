@@ -1,0 +1,8 @@
+# Core pipeline
+ollama>=0.3.0          # Ollama Python client (chat with structured output, embeddings)
+
+# Only needed for --mode rag
+numpy>=1.24
+
+# Everything else uses the Python standard library (argparse, csv, json,
+# xml.etree, urllib). No pandas, no mitreattack lib required.

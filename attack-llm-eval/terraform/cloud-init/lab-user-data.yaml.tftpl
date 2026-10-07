@@ -1,0 +1,31 @@
+#cloud-config
+hostname: ${hostname}
+manage_etc_hosts: true
+
+users:
+  - name: ${username}
+    groups: [sudo]
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ${ssh_key}
+
+package_update: true
+package_upgrade: false
+packages:
+  - qemu-guest-agent      # lets Terraform read the VM IP
+  - curl
+  - wget
+  - git
+  - auditd                # optional second telemetry source
+
+runcmd:
+  - systemctl enable --now qemu-guest-agent
+  # Sysmon for Linux is installed separately by scripts/collect_sysmon.sh,
+  # because the package path is distro-version specific and best run once
+  # you've confirmed the VM is isolated. See the harness README.
+  - [ bash, -c, "echo 'Lab VM up. Next: copy the harness scripts here, run collect_sysmon.sh install, then isolate this VM before running atomics.' > /etc/motd" ]
+
+power_state:
+  mode: reboot
+  condition: true

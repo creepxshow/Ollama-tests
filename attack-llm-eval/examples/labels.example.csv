@@ -1,0 +1,4 @@
+technique_id,start,end,host,image_contains,note
+T1003.008,2024-01-15T10:23:40,2024-01-15T10:23:50,lab-vm,/etc/shadow,read shadow file
+T1098.004,2024-01-15T10:25:00,2024-01-15T10:25:10,lab-vm,authorized_keys,ssh key persistence
+T1136.001,2024-01-15T10:26:00,2024-01-15T10:26:15,lab-vm,useradd,create account
